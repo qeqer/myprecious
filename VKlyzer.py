@@ -5,6 +5,7 @@ from PyQt5.QtGui import *
 import pandas as pd
 import webbrowser
 import json
+import re
 from tools import VkParser, PredictorV2
 
 """id в файле должны быть через запятую"""
@@ -109,7 +110,8 @@ class MainWindow(QMainWindow):
         else:
             txte = self.page_ask_field.text()
             if (txte != ""):
-                page_ids = [txte]
+                txte = re.split(r" |, |,", txte)
+                page_ids = [i for i in txte if i != ""]
             else:
                 page_ids = []
 
